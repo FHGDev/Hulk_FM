@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "discord.js": "latest",
+    "ytdl-core": "latest",
+    "youtube-info": "latest",
+    "get-youtube-id": "latest"
+  }
+}
