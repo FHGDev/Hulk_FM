@@ -24,7 +24,7 @@ bot.on('message', message => {
     if (!vc) return message.channel.send("Join a voice channel first.")
     
     const songs = bot.settings.get('config').songs
-    const chosensong = songs[Math.floor(Math.random() * songs.length))]
+    const chosensong = songs[Math.floor(Math.random() * songs.length)]
     
     vc.join().then(connection => {
       connection.playStream(chosensong.url)
