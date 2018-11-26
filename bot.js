@@ -1,12 +1,18 @@
 const discord = require('discord.js')
 const bot = new discord.RichEmbed()
-bot.prefix = "h:"
-bot.base = bot.guilds.get('516022273069809675')
-bot.ytkey = process.env.yt_key
-bot.config = require('./config.js')
+bot.settings = new discord.Collection()
+bot.settings.set("radio", bot.createVoiceBroadcast())
+bot.settings.set("prefix", "h:")
+bot.settings.set('ytkey', process.env.yt_key)
+bot.settings.set("config", require('./config.js'))
+bot.settings.set("token", process.env.token)
 
 bot.on('ready', () => {
-
+  console.log("HulkFM Ready!")
+  bot.user.setActivity(`Loading HulkFM...`, {type: "STREAMING", url: "https://twitch.tv/freakinghulk"})
+  setTimeout(() => {
+    bot.user.setActivity(`for h:help | ${bot.guilds.size} servers.`, {type: "WATCHING"})
+  }, 10000)
 })
 
 bot.on('message', message => {
@@ -15,9 +21,16 @@ bot.on('message', message => {
   
   if (message.content.startsWith(`${bot.prefix}join`)) {
     const vc = message.member.voiceChannel
-    if (!vc) return message.channel.send("Join a voice channel first.");
+    if (!vc) return message.channel.send("Join a voice channel first.")
     
+    const songs = bot.settings.get('config').songs
+    const chosensong = songs[Math.floor(Math.random() * songs.length))]
+    
+    vc.join().then(connection => {
+      connection.playStream(chosensong.url)
+      bot.user.setActivity(`${chosensong.name} by ${chosensong.artist} | h:help`, {type: "PLAYING"})
+    })
   }
 })
 
-bot.login(process.env.token)
+bot.login(bot.settings.get("token"))
