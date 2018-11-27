@@ -27,17 +27,19 @@ bot.on('message', message => {
     const chosensong = songs[Math.floor(Math.random() * songs.length)]
     
     vc.join().then(connection => {
-      const dispatcher = connection.playStream(bot.settings.get("dl")(chosensong.url))
-      console.log(`Now Playing: ${chosensong.name} by ${chosensong.artist}`)
-      bot.user.setActivity(`${chosensong.name} by ${chosensong.artist} | h:help`, {type: "PLAYING"})
-      
-      dispatcher.on('end', () => {
-        const next = songs[Math.floor(Math.random() * songs.length)]
-        connection.playStream(bot.settings.get('dl')(next.url))
-        bot.user.setActivity(`${next.name} by ${next.artist} | h:help`, {type: "PLAYING"})
-      })
+      chooseSong((song) => {
+        connection.playStream(require('ytdl-core')(song.url))
+        bot.user.setActivity(`${song.name} by ${song.artist} | h:help`, {type: "PLAYING"})
+      }) 
     })
   }
 })
+
+function chooseSong(cb) {
+  const songs = bot.settings.get('config').songs
+  const randomsong = songs[Math.floor(Math.random() * songs.length)]
+  
+  return cb(randomsong)
+}
 
 bot.login(bot.settings.get("token"))
