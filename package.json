@@ -5,6 +5,7 @@
     "ffmpeg-binaries": "latest",
     "ytdl-core": "latest",
     "youtube-info": "latest",
-    "get-youtube-id": "latest"
+    "get-youtube-id": "latest",
+    "node-opus": "latest"
   }
 }
