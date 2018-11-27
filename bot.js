@@ -27,8 +27,15 @@ bot.on('message', message => {
     const chosensong = songs[Math.floor(Math.random() * songs.length)]
     
     vc.join().then(connection => {
-      connection.playStream(bot.settings.get("dl")(chosensong.url))
+      const dispatcher = connection.playStream(bot.settings.get("dl")(chosensong.url))
+      console.log(`Now Playing: ${chosensong.name} by ${chosensong.artist}`)
       bot.user.setActivity(`${chosensong.name} by ${chosensong.artist} | h:help`, {type: "PLAYING"})
+      
+      dispatcher.on('end', () => {
+        const next = songs[Math.floor(Math.random() * songs.length)]
+        connection.playStream(bot.settings.get("dl")(next.url))
+        console.log(`Now Playing: ${next.name} by ${next.artist}`)
+      })
     })
   }
 })
