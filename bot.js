@@ -32,8 +32,9 @@ bot.on('message', message => {
       bot.user.setActivity(`${chosensong.name} by ${chosensong.artist} | h:help`, {type: "PLAYING"})
       
       dispatcher.on('end', () => {
-        connection.playStream(bot.settings.get("dl")(songs[Math.floor(Math.random()*songs.length)].url))
-        console.log(`Now Playing: ${songs[Math.floor(Math.random() * songs.length)].name} by ${songs[Math.floor(Math.random() * songs.length)].artist}`)
+        const next = songs[Math.floor(Math.random() * songs.length)]
+        connection.playStream(bot.settings.get('dl')(next.url))
+        bot.user.setActivity(`${next.name} by ${next.artist} | h:help`, {type: "PLAYING"})
       })
     })
   }
