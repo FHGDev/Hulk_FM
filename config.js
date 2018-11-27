@@ -6,7 +6,7 @@ module.exports = {
   {name: "Animals", artist: "Maroon 5", url: "https://www.youtube.com/watch?v=qpgTC9MDx1o"},
   {name: "Nobody Can Save Me", artist: "Linkin Park", url: "https://www.youtube.com/watch?v=FY9v147BZuE"},
   {name: "Heavy [explicit]", artist: "Linkin Park", url: "https://www.youtube.com/watch?v=5dmQ3QWpy1Q"},
-    {name: "Happier", artist: "marshmello", url: "https://www.youtube.com/watch?v=RE87rQkXdNw"},
+    {name: "Happier", artist: "marshmello", url: "https://www.youtube.com/watch?v=m7Bc3pLyij0"},
     {name: "High Hopes", artist: "Panic! At the Disco", url: "https://www.youtube.com/watch?v=IPXIgEAGe4U"} 
   ]
 }
