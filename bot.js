@@ -30,7 +30,14 @@ bot.on('message', message => {
       chooseSong((song) => {
         connection.playStream(require('ytdl-core')(song.url))
         bot.user.setActivity(`${song.name} by ${song.artist} | h:help`, {type: "PLAYING"})
-      }) 
+      })
+      const dispatcher = connection.dispatcher
+      dispatcher.on('end', () => {
+        chooseSong((song) => {
+           connection.playStream(require('ytdl-core')(song.url))
+           bot.user.setActivity(`${song.name} by ${song.artist}`, {type: "PLAYING"})
+        })
+      })
     })
   }
 })
