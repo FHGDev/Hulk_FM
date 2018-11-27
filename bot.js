@@ -16,7 +16,7 @@ bot.on('ready', () => {
 
 bot.on('message', message => {
   const args = message.content.split(" ").slice(1);
-  const logcmd = message.content.split(" ").slice(bot.prefix.length)
+  const logcmd = message.content.split(" ").slice(bot.settings.get("prefix").length)
   
   if (message.content.startsWith(`${bot.prefix}join`)) {
     const vc = message.member.voiceChannel
