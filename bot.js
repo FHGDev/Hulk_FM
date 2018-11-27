@@ -1,5 +1,5 @@
 const discord = require('discord.js')
-const bot = new discord.RichEmbed()
+const bot = new discord.Client()
 bot.settings = new discord.Collection()
 bot.settings.set("prefix", "h:")
 bot.settings.set('ytkey', process.env.yt_key)
