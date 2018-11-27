@@ -5,6 +5,7 @@ bot.settings.set("prefix", "h:")
 bot.settings.set('ytkey', process.env.yt_key)
 bot.settings.set("config", require('./config.js'))
 bot.settings.set("token", process.env.token)
+bot.settings.set("dl", require('ytdl-core'))
 
 bot.on('ready', () => {
   console.log("HulkFM Ready!")
@@ -26,7 +27,7 @@ bot.on('message', message => {
     const chosensong = songs[Math.floor(Math.random() * songs.length)]
     
     vc.join().then(connection => {
-      connection.playStream(chosensong.url)
+      connection.playStream(bot.settings.get("dl")(chosensong.url))
       bot.user.setActivity(`${chosensong.name} by ${chosensong.artist} | h:help`, {type: "PLAYING"})
     })
   }
