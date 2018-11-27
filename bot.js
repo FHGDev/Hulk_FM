@@ -1,7 +1,6 @@
 const discord = require('discord.js')
 const bot = new discord.RichEmbed()
 bot.settings = new discord.Collection()
-bot.settings.set("radio", bot.createVoiceBroadcast())
 bot.settings.set("prefix", "h:")
 bot.settings.set('ytkey', process.env.yt_key)
 bot.settings.set("config", require('./config.js'))
