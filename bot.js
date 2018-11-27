@@ -18,7 +18,7 @@ bot.on('message', message => {
   const args = message.content.split(" ").slice(1);
   const logcmd = message.content.split(" ").slice(bot.settings.get("prefix").length)
   
-  if (message.content.startsWith(`${bot.prefix}join`)) {
+  if (message.content.startsWith(`${bot.settings.get("prefix")}join`)) {
     const vc = message.member.voiceChannel
     if (!vc) return message.channel.send("Join a voice channel first.")
     
